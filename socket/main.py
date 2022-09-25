@@ -1,8 +1,10 @@
 import socket
+from views import *
+
 
 URLS = {
-        '/': 'Index',
-        '/blog': 'Blog'
+        '/': index,
+        '/blog': blog
         }
 
 #http: tcp/ip
@@ -17,7 +19,8 @@ def generate_content(code, url):
         return '<h1> 404 </h1>'
     if code == 405:
         return '<h1> 405 </h1>'
-    return '<h2>{}</h2>'.format(URLS[url])
+    return URLS[url]()
+
 def parse_request(request):
     parsed = request.split(' ')
     method = parsed[0]
